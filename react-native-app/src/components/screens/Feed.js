@@ -4,7 +4,7 @@ import {
   View,
   ScrollView
 } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import { users } from '../config/data';
 
 class Feed extends Component {
@@ -13,21 +13,20 @@ class Feed extends Component {
     this.props.navigation.navigate('Details', { ...item });
   };
 
-  render() {
-    return (
+  render = () => <View>
+
+    {this.props.screenProps.news_state &&
       <ScrollView>
-        <List>
-          {this.props.screenProps.news_state && this.props.screenProps.news_state.news.map((item, index) => (
+          {this.props.screenProps.news_state.news.map((item, index) => (
             <ListItem
               key={"newsFeed " + index}
               title={item.title}
               onPress={() => this.onLearnMore(item)}
             />
           ))}
-        </List>
       </ScrollView>
-    );
-  }
+    }
+  </View>
 }
 
 export default Feed;
