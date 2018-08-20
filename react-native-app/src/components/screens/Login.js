@@ -88,15 +88,23 @@ export default class LoginScreen2 extends Component {
       password,
     } = this.state;
     this.setState({ isLoading: true });
-    // Simulate an API call
-    setTimeout(() => {
+
+    LayoutAnimation.easeInEaseOut();
+    this.setState({
+      isLoading: false,
+      isEmailValid: this.validateEmail(email) || this.emailInput.shake(),
+      isPasswordValid: password.length >= 8 || this.passwordInput.shake(),
+    });    
+    this.props.screenProps.login({email, password})
+
+    /*setTimeout(() => {
       LayoutAnimation.easeInEaseOut();
       this.setState({
         isLoading: false,
         isEmailValid: this.validateEmail(email) || this.emailInput.shake(),
         isPasswordValid: password.length >= 8 || this.passwordInput.shake(),
       });
-    }, 1500);
+    }, 1500);*/
   }
 
   signUp() {
@@ -106,8 +114,17 @@ export default class LoginScreen2 extends Component {
       passwordConfirmation,
     } = this.state;
     this.setState({ isLoading: true });
-    // Simulate an API call
-    setTimeout(() => {
+
+    LayoutAnimation.easeInEaseOut();
+    this.setState({
+      isLoading: false,
+      isEmailValid: this.validateEmail(email) || this.emailInput.shake(),
+      isPasswordValid: password.length >= 8 || this.passwordInput.shake(),
+      isConfirmationValid: password == passwordConfirmation || this.confirmationInput.shake(),
+    });
+    this.props.screenProps.register({email, password})
+
+  /*  setTimeout(() => {
       LayoutAnimation.easeInEaseOut();
       this.setState({
         isLoading: false,
@@ -115,7 +132,7 @@ export default class LoginScreen2 extends Component {
         isPasswordValid: password.length >= 8 || this.passwordInput.shake(),
         isConfirmationValid: password == passwordConfirmation || this.confirmationInput.shake(),
       });
-    }, 1500);
+    }, 1500);*/
   }
 
   render() {

@@ -42,6 +42,20 @@ router.delete("/news/:id", async (ctx) => {
     let documentQuery = {"_id": ObjectID(ctx.params.id)}; // Used to find the document
     ctx.body = await ctx.app.news.deleteOne(documentQuery);
 });
+
+
+// Create new news
+router.post("/login", async (ctx) => {
+      console.log(ctx.request.body, ctx.request.body.email)
+     const emailSearchResult= await ctx.app.auth.findOne({"email": ctx.request.body.email});
+     console.log(emailSearchResult, ctx.request.body)
+     ctx.body = emailSearchResult
+});// Create new news
+router.post("/register", async (ctx) => {
+    console.log("Inserting ", ctx.request.body)
+    ctx.body = await ctx.app.auth.insert(ctx.request.body);
+});
+
 app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(5000);

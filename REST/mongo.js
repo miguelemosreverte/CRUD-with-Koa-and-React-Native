@@ -6,7 +6,8 @@ module.exports = function (app) {
     MongoClient.connect(MONGO_URL)
         .then((client) => {
               const db = client.db('interview')
-              app.news = db.collection('news')          
+              app.news = db.collection('news')
+              app.auth = db.collection('auth')          
           })
         .catch((err) => console.error(err))
 

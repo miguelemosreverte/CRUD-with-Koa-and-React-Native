@@ -35,7 +35,6 @@ class Feed extends Component {
               }
               title=""
               onPress={()=>{
-                console.log("DELETING " + item._id)
                 this.props.screenProps.newsCRUD({
                 method: "DELETE",
                 url: item._id
@@ -43,6 +42,7 @@ class Feed extends Component {
                 this.props.screenProps.newsCRUD({
                 method: "GET"
                 })
+                //TODO I want to use Redux.thunk to be able to pipe one dispatch into the next.
             }}
             />
             <Text
