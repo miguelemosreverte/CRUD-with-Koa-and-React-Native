@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 
+import {MyCarousel} from './Carousel';
 
 export default class NewsList extends Component {
   componentDidMount() {
@@ -12,17 +13,15 @@ export default class NewsList extends Component {
       <Text>{item.title}</Text>
     </View>
   );
-  render() {
-    const { news } = this.props;
-    console.log("this.props.news[0]", news[0])
-    return (
-      <FlatList
-        styles={styles.container}
-        data={news}
-        renderItem={this.renderItem}
-        keyExtractor={item => item.title + Math.random().toString()}
-      />
-    );
+  render = () => {
+    console.log("this.props.news[0]", this.props.news[0])
+    return <View>
+            {this.props.news &&
+                  <MyCarousel
+                data={this.props.news}
+              />
+            }
+          </View>
   }
 }
 
