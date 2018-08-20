@@ -1,4 +1,5 @@
 
+// I like my reducers to specify which actions belongs to them
 export const GET_NEWS = 'my-awesome-app/news/LOAD';
 export const GET_NEWS_SUCCESS = 'my-awesome-app/news/LOAD_SUCCESS';
 export const GET_NEWS_FAIL = 'my-awesome-app/news/LOAD_FAIL';
