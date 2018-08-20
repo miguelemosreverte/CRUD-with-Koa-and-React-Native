@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
 
-import { listNews } from '../reducers/news';
 
-class NewsList extends Component {
+export default class NewsList extends Component {
   componentDidMount() {
+    console.log("calling listNews 2")
     this.props.listNews();
   }
   renderItem = ({ item }) => (
@@ -15,11 +14,13 @@ class NewsList extends Component {
   );
   render() {
     const { news } = this.props;
+    console.log("this.props.news[0]", news[0])
     return (
       <FlatList
         styles={styles.container}
         data={news}
         renderItem={this.renderItem}
+        keyExtractor={item => item.title + Math.random().toString()}
       />
     );
   }
@@ -35,16 +36,3 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc'
   }
 });
-
-const mapStateToProps = state => {
-  let storedRepositories = state.news.map(repo => ({ key: repo.id, ...repo }));
-  return {
-    news: storedRepositories
-  };
-};
-
-const mapDispatchToProps = {
-  listNews
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewsList);
