@@ -8,12 +8,11 @@ class App extends Component {
       method: "GET"
     })
 
-  render = () => {
-       console.log(this.props.login_state)   
-      return <View style={styles.container}>
+  render = () => (
+       <View style={styles.container}>
           <Root screenProps={this.props}/>
-      </View>
-  }
+      </View>)
+
 }
 
 

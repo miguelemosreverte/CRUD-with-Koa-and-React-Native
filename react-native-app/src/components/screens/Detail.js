@@ -1,32 +1,44 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
-import { Tile, List, ListItem } from 'react-native-elements';
+import { Card, Text, List, ListItem } from 'react-native-elements';
 
 class Detail extends Component {
+  getImageUrl () {
+    return 'https://loremflickr.com/320/240/newspaper?date=' + Math.random();
+  }
+
   render() {
     const { title, description, content, link } = this.props.navigation.state.params;
 
     return (
+
       <ScrollView>
+      <Card
+        image={{uri: this.getImageUrl()}}
+      >
 
 
           <ListItem
             title="Description"
-            rightTitle={description}
             hideChevron
           />
+          <Text>{description}</Text>
+
+
           <ListItem
             title="Content"
-            rightTitle={content}
             hideChevron
           />
+          <Text>{content}</Text>
 
           <ListItem
             title="Link"
-            rightTitle={link}
             hideChevron
           />
-      </ScrollView>
+          <Text>{link}</Text>
+
+        </Card>
+    </ScrollView>
     );
   }
 }

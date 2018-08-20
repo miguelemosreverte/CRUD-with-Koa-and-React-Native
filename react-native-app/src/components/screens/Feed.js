@@ -9,6 +9,8 @@ import { ListItem } from 'react-native-elements';
 
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Authorized from '../HOC/Authorized'
+import CRUD_button from '../CRUD_button'
 
 class Feed extends Component {
   onLearnMore = (item) => this.props.navigation.navigate('Details', { ...item })
@@ -24,31 +26,14 @@ class Feed extends Component {
           {news_state.news.map((item, index) => (
             <View style={styles.row}
               key={"newsFeedView " + index}>
-            {!!auth &&
-              <Button
-               key={"newsFeedTrashButton " + index}
-               icon={
-                 <Icon
-                   name='trash'
-                   size={15}
-                   color='white'
-                   style={styles.trashButton}
 
-                 />
-               }
-               title=""
-               onPress={()=>{
-                 this.props.screenProps.newsCRUD({
-                 method: "DELETE",
-                 url: item._id,
-                 headers: {'Authorization': "bearer " + auth.token}
-                 })
-                 this.props.screenProps.newsCRUD({
-                 method: "GET"
-                 })
-                 //TODO I want to use Redux.thunk to be able to pipe one dispatch into the next.
-             }}
-             />}
+              <Authorized {...this.props.screenProps}>
+              <CRUD_button
+              index={index}
+              />
+              </Authorized>
+
+
             <Text
               style={styles.text}
               key={"newsFeed " + index}
