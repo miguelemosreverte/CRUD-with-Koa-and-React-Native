@@ -14,7 +14,7 @@ export default createReducer({}, {
     return { ...state, loading: false, auth: action.payload.data };
 	},
 	[AUTH_FAIL](state, action) {
-    return { ...state, loading: false, error: action.payload.error };
+    return { ...state, loading: false, error: action };
 	},
 })
 

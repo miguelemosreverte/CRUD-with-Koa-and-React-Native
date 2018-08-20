@@ -12,16 +12,19 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Feed extends Component {
   onLearnMore = (item) => this.props.navigation.navigate('Details', { ...item })
-  render = () => <View>
+  render = () => {
+    const news_state = this.props.screenProps.news_state
+    const auth = this.props.screenProps.login_state.auth
+    return <View>
 
-    { this.props.screenProps.news_state &&
-      this.props.screenProps.news_state.news &&
-      this.props.screenProps.news_state.news.map &&
+    { news_state &&
+      news_state.news &&
+      news_state.news.map &&
       <ScrollView>
-          {this.props.screenProps.news_state.news.map((item, index) => (
+          {news_state.news.map((item, index) => (
             <View style={styles.row}
               key={"newsFeedView " + index}>
-            {!!this.props.screenProps.login_state.auth &&
+            {!!auth &&
               <Button
                key={"newsFeedTrashButton " + index}
                icon={
@@ -37,7 +40,8 @@ class Feed extends Component {
                onPress={()=>{
                  this.props.screenProps.newsCRUD({
                  method: "DELETE",
-                 url: item._id
+                 url: item._id,
+                 headers: {'Authorization': "bearer " + auth.token}
                  })
                  this.props.screenProps.newsCRUD({
                  method: "GET"
@@ -55,6 +59,7 @@ class Feed extends Component {
       </ScrollView>
     }
   </View>
+  }
 }
 
 const styles = StyleSheet.create({

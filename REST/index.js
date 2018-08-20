@@ -1,3 +1,5 @@
+
+const jwt = require("./jwt");
 const Koa = require("koa");
 const Router = require("koa-router");
 const BodyParser = require("koa-bodyparser");
@@ -46,6 +48,7 @@ securedRouter.put("/news/:id", async (ctx) => {
 });
 // Delete one
 securedRouter.delete("/news/:id", async (ctx) => {
+  console.log("DELETE IS COMING")
     const documentQuery = {"_id": ObjectID(ctx.params.id)}; // Used to find the document
     ctx.body = await ctx.app.news.deleteOne(documentQuery);
 });
@@ -56,6 +59,7 @@ router.post("/login", async (ctx) => {
      const givenEmailThisIsTheResult = await ctx.app.auth.findOne({"email": ctx.request.body.email});
      if (givenEmailThisIsTheResult
        && givenEmailThisIsTheResult.password == ctx.request.body.password) {
+       console.log("LOGGED")
        ctx.body = {
              token: jwt.issue({
                  user: "user",
@@ -63,6 +67,7 @@ router.post("/login", async (ctx) => {
              })}
     }
     else  {
+    console.log("NOT LOGGED",ctx.request.body, givenEmailThisIsTheResult)
         ctx.status = 401;
         ctx.body = {error: "Invalid login"}
     }
@@ -75,9 +80,9 @@ router.post("/register", async (ctx) => {
 // Add the securedRouter to our app as well
 app.use(router.routes()).use(router.allowedMethods());
 
-//app.use(require("./jwt"));  // Not usued because it says to the user "Authentication Error", while i like JSON more
-const jwt = require("./jwt");
-app.use(jwt.errorHandler()).use(jwt.jwt()); // {"error":"Not authorized"} much better
+app.use(require("./jwt"));  // Not usued because it says to the user "Authentication Error", while i like JSON more
+//const jwt = require("./jwt");
+//app.use(jwt.errorHandler()).use(jwt.jwt()); // {"error":"Not authorized"} much better
 
 app.use(securedRouter.routes()).use(securedRouter.allowedMethods());
 //app.use(jwt.errorHandler()).use(jwt.jwt());

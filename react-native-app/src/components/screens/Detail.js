@@ -4,7 +4,7 @@ import { Tile, List, ListItem } from 'react-native-elements';
 
 class Detail extends Component {
   render() {
-    const { title, description, text, link } = this.props.navigation.state.params;
+    const { title, description, content, link } = this.props.navigation.state.params;
 
     return (
       <ScrollView>
@@ -16,8 +16,8 @@ class Detail extends Component {
             hideChevron
           />
           <ListItem
-            title="Text"
-            rightTitle={text}
+            title="Content"
+            rightTitle={content}
             hideChevron
           />
 

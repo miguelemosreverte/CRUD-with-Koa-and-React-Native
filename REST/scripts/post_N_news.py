@@ -28,5 +28,5 @@ if __name__ == "__main__":
         "content": t,
         "link": "http://www.lavoz.com.ar/"
         }
-        headers = {'Content-type': 'application/json'}
+        headers = {'Content-type': 'application/json', 'Authorization': "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidXNlciIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTUzNDc2NTQ4OX0.PHH3IPY6hrPHo6rb8rRwadHkov90iwnmnicLSg3IpDg"}
         r = requests.post(url, data=json.dumps(data), headers=headers)

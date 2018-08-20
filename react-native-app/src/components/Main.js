@@ -9,7 +9,7 @@ class App extends Component {
     })
 
   render = () => {
-       console.log(this.props)   
+       console.log(this.props.login_state)   
       return <View style={styles.container}>
           <Root screenProps={this.props}/>
       </View>
