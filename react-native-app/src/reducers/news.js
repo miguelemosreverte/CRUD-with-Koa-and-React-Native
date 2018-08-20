@@ -17,11 +17,14 @@ export default function news (state = { news: [] }, action) {
   }
 }
 
-export function listNews() {
+export function CRUD({method, headers, data}) {
   return {
     type: GET_NEWS,
     payload: {
       request: {
+        method,
+        headers,
+        data,
         url: `/news`
       }
     }

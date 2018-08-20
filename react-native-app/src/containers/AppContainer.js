@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import Main from '../components/Main'
 import NewsList from '../components/NewsList'
 
-import {GET_NEWS, getNews, listNews} from '../reducers/news'
+import {GET_NEWS, getNews, CRUD as newsCRUD} from '../reducers/news'
 
 const mapStateToProps = state => {
 	return {
@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  	listNews: () => dispatch(listNews())
+  	newsCRUD: (parameters) => dispatch(newsCRUD(parameters))
 })
 
 

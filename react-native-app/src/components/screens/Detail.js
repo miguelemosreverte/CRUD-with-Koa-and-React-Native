@@ -10,7 +10,6 @@ class Detail extends Component {
       <ScrollView>
 
 
-        <List>
           <ListItem
             title="Description"
             rightTitle={description}
@@ -21,16 +20,12 @@ class Detail extends Component {
             rightTitle={text}
             hideChevron
           />
-        </List>
 
-        <List>
           <ListItem
             title="Link"
             rightTitle={link}
             hideChevron
           />
-        </List>
-
       </ScrollView>
     );
   }

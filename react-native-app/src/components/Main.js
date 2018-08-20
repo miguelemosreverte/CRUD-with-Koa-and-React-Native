@@ -3,11 +3,14 @@ import { Root, Tabs } from './config/router';
 import { StyleSheet, Text, View } from 'react-native';
 
 class App extends Component {
-  componentDidMount = () => this.props.listNews()
-  
-  render = () => {console.log(this.props); return <View style={styles.container}>
+  componentDidMount = () =>
+    this.props.newsCRUD({
+      method: "GET"
+    })
+
+  render = () => <View style={styles.container}>
                   <Root screenProps={this.props}/>
-                </View>}
+                </View>
 }
 
 
