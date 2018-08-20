@@ -27,7 +27,7 @@ export class MyCarousel extends Component {
         );
     }
 }
-const sliderWidth = Dimensions.get('window').width;
+const sliderWidth = Dimensions.get('window').width * 0.9;
 const itemHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({

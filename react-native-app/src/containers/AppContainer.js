@@ -2,11 +2,11 @@ import { connect } from 'react-redux'
 import Main from '../components/Main'
 import NewsList from '../components/NewsList'
 
-import { news_reducer, GET_NEWS, getNews, listNews} from '../reducers/news'
+import {GET_NEWS, getNews, listNews} from '../reducers/news'
 
 const mapStateToProps = state => {
 	return {
-		news: getNews(state)
+		news_state: getNews(state)
 	}
 }
 

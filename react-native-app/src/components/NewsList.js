@@ -14,11 +14,12 @@ export default class NewsList extends Component {
     </View>
   );
   render = () => {
-    console.log("this.props.news[0]", this.props.news[0])
+    console.log("this.props", this.props)
+    console.log("this.props.news_state.news[0]", this.props.news_state.news[0])
     return <View>
-            {this.props.news &&
+            {this.props.news_state.news &&
                   <MyCarousel
-                data={this.props.news}
+                data={this.props.news_state.news}
               />
             }
           </View>

@@ -4,7 +4,7 @@ import { Provider, connect } from 'react-redux';
 import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
 
-import {news_reducer} from './src/reducers/news';
+import reducer from './src/reducers/index';
 import AppContainer from './src/containers/AppContainer'
 
 const client = axios.create({
@@ -12,7 +12,7 @@ const client = axios.create({
   responseType: 'json'
 });
 
-const store = createStore(news_reducer, applyMiddleware(axiosMiddleware(client)));
+const store = createStore(reducer, applyMiddleware(axiosMiddleware(client)));
 
 export default class App extends Component {
   render() {

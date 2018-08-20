@@ -1,35 +1,22 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Root, Tabs } from './config/router';
 import { StyleSheet, Text, View } from 'react-native';
 
-
-import news from '../reducers/news';
-import NewsList from './NewsList';
-
-
 class App extends Component {
-
-    render() {
-
-        return (
-
-          <View style={styles.container}>
-          <Text> pepe</Text>
-            <NewsList {...this.props}/>
-          </View>
-
-
-        )
-    }
+  componentDidMount = () => this.props.listNews()
+  
+  render = () => {console.log(this.props); return <View style={styles.container}>
+                  <Root screenProps={this.props}/>
+                </View>}
 }
 
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    marginTop: 50
+    backgroundColor: 'white',
+    marginTop: 25
   }
 });
 
-
-export default App
+export default App;

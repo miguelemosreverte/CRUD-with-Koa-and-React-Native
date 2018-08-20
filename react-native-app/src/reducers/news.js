@@ -4,7 +4,7 @@ export const GET_NEWS = 'my-awesome-app/news/LOAD';
 export const GET_NEWS_SUCCESS = 'my-awesome-app/news/LOAD_SUCCESS';
 export const GET_NEWS_FAIL = 'my-awesome-app/news/LOAD_FAIL';
 
-export function news_reducer(state = { news: [] }, action) {
+export default function news (state = { news: [] }, action) {
   switch (action.type) {
     case GET_NEWS:
       return { ...state, loading: true };
