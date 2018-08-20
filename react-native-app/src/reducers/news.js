@@ -1,23 +1,28 @@
-
+import { createReducer } from 'redux-create-reducer'
 // I like my reducers to specify which actions belongs to them
 export const CRUD_NEWS = 'my-awesome-app/news/LOAD';
 export const CRUD_NEWS_SUCCESS = 'my-awesome-app/news/LOAD_SUCCESS';
 export const CRUD_NEWS_FAIL = 'my-awesome-app/news/LOAD_FAIL';
 
-export default function news (state = { news: [] }, action) {
-  switch (action.type) {
-    case CRUD_NEWS:
-      return { ...state, loading: true };
-    case CRUD_NEWS_SUCCESS:
-      return { ...state, loading: false, news: action.payload.data };
-    case CRUD_NEWS_FAIL:
-      return { ...state, loading: false, error: action.payload.error };
-    default:
-      return state;
-  }
-}
 
-export function CRUD({method, headers, data, url}) {
+
+export default createReducer([], {
+	[CRUD_NEWS](state, action) {
+		return { ...state, loading: true };
+	},
+	[CRUD_NEWS_SUCCESS](state, action) {
+    return { ...state, loading: false, news: action.payload.data };
+	},
+	[CRUD_NEWS_FAIL](state, action) {
+    return { ...state, loading: false, error: action.payload };
+	},
+})
+
+
+
+
+
+export function CRUD({method, headers, data, url, ...rest}) {
   const sanitized_url = url || ""
   const url_needs_fixing = sanitized_url[0] != "/" && sanitized_url !== undefined
   const final_url = url_needs_fixing? "/" + sanitized_url : sanitized_url
@@ -28,7 +33,8 @@ export function CRUD({method, headers, data, url}) {
         method,
         headers,
         data,
-        url: '/news' + final_url
+        url: '/news' + final_url,
+        ...rest
       }
     }
   };

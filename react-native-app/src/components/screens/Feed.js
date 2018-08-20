@@ -12,7 +12,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Feed extends Component {
   onLearnMore = (item) => this.props.navigation.navigate('Details', { ...item })
-
   render = () => <View>
 
     { this.props.screenProps.news_state &&
@@ -22,29 +21,30 @@ class Feed extends Component {
           {this.props.screenProps.news_state.news.map((item, index) => (
             <View style={styles.row}
               key={"newsFeedView " + index}>
-            <Button
-              key={"newsFeedTrashButton " + index}
-              icon={
-                <Icon
-                  name='trash'
-                  size={15}
-                  color='white'
-                  style={styles.trashButton}
+            {!!this.props.screenProps.login_state.auth &&
+              <Button
+               key={"newsFeedTrashButton " + index}
+               icon={
+                 <Icon
+                   name='trash'
+                   size={15}
+                   color='white'
+                   style={styles.trashButton}
 
-                />
-              }
-              title=""
-              onPress={()=>{
-                this.props.screenProps.newsCRUD({
-                method: "DELETE",
-                url: item._id
-                })
-                this.props.screenProps.newsCRUD({
-                method: "GET"
-                })
-                //TODO I want to use Redux.thunk to be able to pipe one dispatch into the next.
-            }}
-            />
+                 />
+               }
+               title=""
+               onPress={()=>{
+                 this.props.screenProps.newsCRUD({
+                 method: "DELETE",
+                 url: item._id
+                 })
+                 this.props.screenProps.newsCRUD({
+                 method: "GET"
+                 })
+                 //TODO I want to use Redux.thunk to be able to pipe one dispatch into the next.
+             }}
+             />}
             <Text
               style={styles.text}
               key={"newsFeed " + index}

@@ -2,60 +2,86 @@ const Koa = require("koa");
 const Router = require("koa-router");
 const BodyParser = require("koa-bodyparser");
 
-const app = new Koa();
+const app = new Koa();// Create a new securedRouter
 const router = new Router();
+const securedRouter = new Router();
 
 require("./mongo")(app);
 const ObjectID = require("mongodb").ObjectID;
 
 
+
 // Use the bodyparser middlware
 app.use(BodyParser());
+
+
 
 router.get("/", async function (ctx) {
     ctx.body = {message: "Hello World!"}
 })
 .post("/", async function (ctx) {
-    let name = ctx.request.body.name || "World";
+    const name = ctx.request.body.name || "World";
     ctx.body = {message: `Hello ${name}!`}
-});
-// List all news
-router.get("/news", async (ctx) => {
+})
+.get("/news", async (ctx) => {
     ctx.body = await ctx.app.news.find().toArray();
-});
-// Create new news
-router.post("/news", async (ctx) => {
-    ctx.body = await ctx.app.news.insert(ctx.request.body);
-});
-// Get one
-router.get("/news/:id", async (ctx) => {
+})
+.get("/news/:id", async (ctx) => {
     ctx.body = await ctx.app.news.findOne({"_id": ObjectID(ctx.params.id)});
 });
+
+
+
+
+
+// Create new news
+securedRouter.post("/news", async (ctx) => {
+    ctx.body = await ctx.app.news.insert(ctx.request.body);
+});
 // Update one
-router.put("/news/:id", async (ctx) => {
-    let documentQuery = {"_id": ObjectID(ctx.params.id)}; // Used to find the document
-    let valuesToUpdate = ctx.request.body;
+securedRouter.put("/news/:id", async (ctx) => {
+    const documentQuery = {"_id": ObjectID(ctx.params.id)}; // Used to find the document
+    const valuesToUpdate = ctx.request.body;
     ctx.body = await ctx.app.news.updateOne(documentQuery, valuesToUpdate);
 });
 // Delete one
-router.delete("/news/:id", async (ctx) => {
-    let documentQuery = {"_id": ObjectID(ctx.params.id)}; // Used to find the document
+securedRouter.delete("/news/:id", async (ctx) => {
+    const documentQuery = {"_id": ObjectID(ctx.params.id)}; // Used to find the document
     ctx.body = await ctx.app.news.deleteOne(documentQuery);
 });
 
 
-// Create new news
+// Login users
 router.post("/login", async (ctx) => {
-      console.log(ctx.request.body, ctx.request.body.email)
-     const emailSearchResult= await ctx.app.auth.findOne({"email": ctx.request.body.email});
-     console.log(emailSearchResult, ctx.request.body)
-     ctx.body = emailSearchResult
-});// Create new news
+     const givenEmailThisIsTheResult = await ctx.app.auth.findOne({"email": ctx.request.body.email});
+     if (givenEmailThisIsTheResult
+       && givenEmailThisIsTheResult.password == ctx.request.body.password) {
+       ctx.body = {
+             token: jwt.issue({
+                 user: "user",
+                 role: "admin"
+             })}
+    }
+    else  {
+        ctx.status = 401;
+        ctx.body = {error: "Invalid login"}
+    }
+});// Create new users
 router.post("/register", async (ctx) => {
     console.log("Inserting ", ctx.request.body)
     ctx.body = await ctx.app.auth.insert(ctx.request.body);
 });
 
+// Add the securedRouter to our app as well
 app.use(router.routes()).use(router.allowedMethods());
+
+//app.use(require("./jwt"));  // Not usued because it says to the user "Authentication Error", while i like JSON more
+const jwt = require("./jwt");
+app.use(jwt.errorHandler()).use(jwt.jwt()); // {"error":"Not authorized"} much better
+
+app.use(securedRouter.routes()).use(securedRouter.allowedMethods());
+//app.use(jwt.errorHandler()).use(jwt.jwt());
+
+
 
 app.listen(5000);

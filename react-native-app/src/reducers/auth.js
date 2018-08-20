@@ -1,21 +1,26 @@
-
+import { createReducer } from 'redux-create-reducer'
 // I like my reducers to specify which actions belongs to them
-export const AUTH = 'my-awesome-app/AUTH/LOAD';
-export const AUTH_SUCCESS = 'my-awesome-app/AUTH/LOAD_SUCCESS';
-export const AUTH_FAIL = 'my-awesome-app/AUTH/LOAD_FAIL';
+export const AUTH = 'my-awesome-app/auth/LOAD';
+export const AUTH_SUCCESS = 'my-awesome-app/auth/LOAD_SUCCESS';
+export const AUTH_FAIL = 'my-awesome-app/auth/LOAD_FAIL';
 
-export default function authentication (state = { AUTH: [] }, action) {
-  switch (action.type) {
-    case AUTH:
-      return { ...state, loading: true };
-    case AUTH_SUCCESS:
-      return { ...state, loading: false, AUTH: action.payload.data };
-    case AUTH_FAIL:
-      return { ...state, loading: false, error: action.payload.error };
-    default:
-      return state;
-  }
-}
+
+
+export default createReducer({}, {
+	[AUTH](state, action) {
+		return { ...state, loading: true };
+	},
+	[AUTH_SUCCESS](state, action) {
+    return { ...state, loading: false, auth: action.payload.data };
+	},
+	[AUTH_FAIL](state, action) {
+    return { ...state, loading: false, error: action.payload.error };
+	},
+})
+
+
+
+
 
 const _auth = ({email, password}, url) => ({
     type: AUTH,
@@ -34,5 +39,4 @@ export const login    = (param) => _auth(param, '/login')
 export const register = (param) => _auth(param, '/register')
 
 
-
-export const getLogin = state => state.authentication
+export const getAuth = state => state.auth
