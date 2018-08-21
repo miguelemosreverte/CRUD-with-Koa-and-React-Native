@@ -11,9 +11,7 @@ export default createReducer([], {
 		return { ...state, loading: true };
 	},
 	[CRUD_NEWS_SUCCESS](state, action) {
-		console.log('before', state)
 		const after = { ...state, loading: false, news: action.payload.data }
-		console.log(after)
     return after
 	},
 	[CRUD_NEWS_FAIL](state, action) {

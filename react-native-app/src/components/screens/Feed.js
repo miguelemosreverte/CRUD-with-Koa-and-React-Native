@@ -68,11 +68,14 @@ class Feed extends Component {
               </Authorized>
 
 
-            <Text
+            <ListItem
               style={styles.text}
               key={"newsFeed " + index}
               onPress={() => this.onLearnMore(item)}
-            >{item.title}</Text>
+              title={item.title.split(" ").slice(0,5).join(" ")}
+              subtitle={item.title.split(" ").slice(5,item.title.length-1).join(" ")}
+              style={styles.ListItem}
+            />
             </View>
           ))}
       </ScrollView>
@@ -95,6 +98,11 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 5,
   },
+  ListItem: {
+
+    margin: 5,
+      flex: 1,
+  }
 });
 
 export default Feed;
