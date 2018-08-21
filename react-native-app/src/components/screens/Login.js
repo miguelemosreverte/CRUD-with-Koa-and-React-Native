@@ -94,7 +94,7 @@ export default class LoginScreen2 extends Component {
       isLoading: false,
       isEmailValid: this.validateEmail(email) || this.emailInput.shake(),
       isPasswordValid: password.length >= 8 || this.passwordInput.shake(),
-    });    
+    });
     this.props.screenProps.login({email, password})
 
     /*setTimeout(() => {
@@ -148,6 +148,7 @@ export default class LoginScreen2 extends Component {
     } = this.state;
     const isLoginPage = selectedCategory === 0;
     const isSignUpPage = selectedCategory === 1;
+
     return (
       <View style={styles.container}>
         <ImageBackground

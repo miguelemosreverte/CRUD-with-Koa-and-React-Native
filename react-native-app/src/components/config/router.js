@@ -10,14 +10,12 @@ import Login from '../screens/Login';
 export const FeedStack = createStackNavigator({
   Feed: {
     screen: props =><Feed screenProps={props.screenProps} navigation={props.navigation}/>,
-    navigationOptions: {
-    },
+    navigationOptions: ({ navigation }) => ({
+      header: null
+    }),
   },
   Details: {
-    screen: Detail,
-    navigationOptions: ({ navigation }) => ({
-      title: `${navigation.state.params.title}`,
-    }),
+    screen: props =><Detail screenProps={props.screenProps} navigation={props.navigation}/>
   },
 });
 

@@ -11,7 +11,10 @@ export default createReducer([], {
 		return { ...state, loading: true };
 	},
 	[CRUD_NEWS_SUCCESS](state, action) {
-    return { ...state, loading: false, news: action.payload.data };
+		console.log('before', state)
+		const after = { ...state, loading: false, news: action.payload.data }
+		console.log(after)
+    return after
 	},
 	[CRUD_NEWS_FAIL](state, action) {
     return { ...state, loading: false, error: action.payload };
@@ -26,6 +29,7 @@ export function CRUD({method, headers, data, url, ...rest}) {
   const sanitized_url = url || ""
   const url_needs_fixing = sanitized_url[0] != "/" && sanitized_url !== undefined
   const final_url = url_needs_fixing? "/" + sanitized_url : sanitized_url
+
   return {
     type: CRUD_NEWS,
     payload: {

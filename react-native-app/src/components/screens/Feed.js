@@ -10,14 +10,38 @@ import { ListItem } from 'react-native-elements';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Authorized from '../HOC/Authorized'
-import CRUD_button from '../CRUD_button'
+import CustomButton from '../Button'
+import Detail from './Detail'
 
 class Feed extends Component {
-  onLearnMore = (item) => this.props.navigation.navigate('Details', { ...item })
+
+  state = { editing: false}
+
+  onLearnMore = (item) => this.props.navigation.navigate('Details', { ...item, newsCRUD : this.props.screenProps.newsCRUD })
   render = () => {
     const news_state = this.props.screenProps.news_state
     const auth = this.props.screenProps.login_state.auth
+    const token = auth ? auth.token : undefined
     return <View>
+
+
+    {!this.state.editing &&
+    <Authorized auth={auth}>
+    <CustomButton
+    key={"CreateButton"}
+    iconName={this.state.editing?  "send-o" : "plus"}
+    onPress={() => this.setState({editing: !this.state.editing})}
+    />
+    </Authorized>}
+
+    {this.state.editing &&
+    <Detail
+    hideImage
+    informSuccess={()=>this.setState({editing:false})}
+    METHOD="POST"
+    newsCRUD={this.props.screenProps.newsCRUD}
+    token={token}
+    />}
 
     { news_state &&
       news_state.news &&
@@ -27,9 +51,19 @@ class Feed extends Component {
             <View style={styles.row}
               key={"newsFeedView " + index}>
 
-              <Authorized {...this.props.screenProps}>
-              <CRUD_button
-              index={index}
+              <Authorized auth={auth}>
+              <CustomButton
+              key={"DeleteButton" + index}
+              onPress={() => {
+                          this.props.screenProps.newsCRUD({
+                            method: this.props.METHOD || "DELETE",
+                            url: item._id,
+                            headers: {'Authorization': "bearer " + token}
+                          })
+                          this.props.screenProps.newsCRUD({
+                            method: "GET"
+                          })
+                      }}
               />
               </Authorized>
 

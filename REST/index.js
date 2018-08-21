@@ -38,17 +38,17 @@ router.get("/", async function (ctx) {
 
 // Create new news
 securedRouter.post("/news", async (ctx) => {
-    ctx.body = await ctx.app.news.insert(ctx.request.body);
+    console.log(ctx.request.body)
+    ctx.body = await ctx.app.news.insert(ctx.request.body)
 });
 // Update one
 securedRouter.put("/news/:id", async (ctx) => {
-    const documentQuery = {"_id": ObjectID(ctx.params.id)}; // Used to find the document
-    const valuesToUpdate = ctx.request.body;
-    ctx.body = await ctx.app.news.updateOne(documentQuery, valuesToUpdate);
+    const documentQuery = {"_id": ObjectID(ctx.params.id)} // Used to find the document
+    const valuesToUpdate = ctx.request.body
+    ctx.body = await ctx.app.news.update(documentQuery, {'$set': valuesToUpdate})
 });
 // Delete one
 securedRouter.delete("/news/:id", async (ctx) => {
-  console.log("DELETE IS COMING")
     const documentQuery = {"_id": ObjectID(ctx.params.id)}; // Used to find the document
     ctx.body = await ctx.app.news.deleteOne(documentQuery);
 });
