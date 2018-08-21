@@ -9,6 +9,7 @@
 
 <br/>
 <br/>
+
 # Assumptions
 ##### The API should be secured.
 This was done through JSON web tokens.
