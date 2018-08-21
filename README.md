@@ -25,7 +25,8 @@ To achieve this no mutation was performed, and rigid architectural principles we
 
 No child of AppContainer.js had to worry about dispatching an event, or keeping its data consistent with the rest of the app.
 
-
+# Restrictions
+No UI feedback was given to the user upon Login or Register. Seemed out of scope, but is left as a TODO.
 
 # Biases
 ##### I enjoy ReduxJS because I prefer _this_
