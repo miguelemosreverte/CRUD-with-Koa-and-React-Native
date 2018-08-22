@@ -8,7 +8,7 @@ import reducer from './src/reducers/index';
 import AppContainer from './src/containers/AppContainer'
 
 const client = axios.create({
-  baseURL: 'http://192.168.0.105:5000',
+  baseURL: 'http://ec2-34-218-234-122.us-west-2.compute.amazonaws.com:9000/',
   responseType: 'json'
 });
 

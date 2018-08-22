@@ -1,5 +1,23 @@
+
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "name": "Miguel Lemos",
+    "description": "A CRUD test for CVA Medios!",
+    "slug": "miguel-lemos-cva-medios-slug",
+    "sdkVersion": "28.0.0",
+    "version": "1.0.1",
+    "orientation": "portrait",
+    "platforms": ["android"],
+    "primaryColor": "#f6bd94",
+    "icon": "./icon.png",
+    "splash": {
+      "backgroundColor": "#f6bd94",
+      "image": "./splash.png",
+      "resizeMode": "contain"
+    },
+    "android": {
+      "icon": "./icon.png",
+      "package": "com.cvamedios.miguellemos"
+    }
   }
 }

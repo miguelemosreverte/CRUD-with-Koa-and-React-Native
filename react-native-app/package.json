@@ -1,5 +1,11 @@
 {
-  "name": "my-app",
+  "name": "MiguelLemosCVAMedios",
+  "icon": "./icon.png",
+  "slug": "miguel-lemos-cva-medios-slug",
+  "sdkVersion": "29.0.0",
+  "android": {
+    "package": "com.cvamedios.miguellemos"
+  },
   "version": "0.1.0",
   "private": true,
   "devDependencies": {

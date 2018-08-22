@@ -1,6 +1,7 @@
 # CRUD-with-Koa-and-React-Native
 ... for a job interview
 
+![](https://im5.ezgif.com/tmp/ezgif-5-76b77fd135.gif)
 
 <br/>
 <br/>
