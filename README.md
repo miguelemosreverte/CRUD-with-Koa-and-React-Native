@@ -1,6 +1,28 @@
 # CRUD-with-Koa-and-React-Native
 ... for a job interview
 
+
+
+# Already compiled for you
+## https://github.com/miguelemosreverte/CRUD-with-Koa-and-React-Native/blob/master/CVAMedios-miguelLemos.apk
+
+-----------------
+
+# Compilation steps
+
+
+
+https://docs.expo.io/versions/latest/distribution/building-standalone-apps
+
+- ## npm install -g exp
+- ## exp login
+    - ##### (email: miguelemosreverte || password: osopanda)
+- ## exp build:android
+
+# _and then_
+![](https://i.imgur.com/BSNpI7G.png)
+
+
 ![](https://i.imgur.com/Wb2XGvK.gif)
 <br/>
 <br/>
@@ -9,6 +31,8 @@
 
 <br/>
 <br/>
+
+-----------------------------------
 
 # Assumptions
 ##### The API should be secured.
