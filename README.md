@@ -1,13 +1,15 @@
 # CRUD-with-Koa-and-React-Native
 ... for a job interview
 
-![](https://im5.ezgif.com/tmp/ezgif-5-76b77fd135.gif)
+![](https://i.imgur.com/Wb2XGvK.gif)
+<br/>
+<br/>
+
+![](https://i.imgur.com/0HXfxay.png)
 
 <br/>
 <br/>
-![](https://i.imgur.com/0HXfxay.png)
-<br/>
-<br/>
+
 # Assumptions
 ##### The API should be secured.
 This was done through JSON web tokens.
@@ -23,7 +25,8 @@ To achieve this no mutation was performed, and rigid architectural principles we
 
 No child of AppContainer.js had to worry about dispatching an event, or keeping its data consistent with the rest of the app.
 
-
+# Restrictions
+No UI feedback was given to the user upon Login or Register. Seemed out of scope, but is left as a TODO.
 
 # Biases
 ##### I enjoy ReduxJS because I prefer _this_
